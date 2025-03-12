@@ -90,6 +90,27 @@ console.log(add(1)(2)(3)());
 console.log(add(10)(20)());
 console.log(add(1)());
 
+// Привязать контекст объекта к функции logger, чтобы при вызове this.item
+//  выводило некоторое значение свойства item того объекта
+// (Привязать через bind, call, apply)
+
+function logger(from) {
+    console.log(`I output only external context: ${this.item} from ${from}`);
+ }
+
+ const obj = {item: "some value" };
+ logger()
+ 
+ let loggerBind = logger.bind(obj);
+ loggerBind('Ann');
+
+ logger.call(obj, 'Alex');
+
+ logger.apply(obj, ['Bob']);
+
+
+
+
 
 
  
