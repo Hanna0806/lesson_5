@@ -39,8 +39,8 @@
 function memoize(callback) {
     const cache = {}
 
-    return function(...args) {
-   
+    return function (...args) {
+
         const sortedArgs = [...args].sort(); //Создаём копию, сортируем массив
 
         const key = JSON.stringify(sortedArgs);
@@ -69,3 +69,27 @@ const memoizeSum = memoize(sum);
 memoizeSum(2, -4, 5);
 memoizeSum(-4, 2, 5);
 memoizeSum(5, 2, -4);
+
+// Написать каррированную функцию add(a)(b)(c)...(n), 
+// которая может работать с произвольным числом аргументов в виде такой цепочки
+function add(a) {
+    let sum = a;
+
+    function inner(b) {
+        if (b === undefined) {
+            return sum; 
+        }
+        sum += b;
+        return inner; 
+    }
+
+    return inner;
+}
+
+console.log(add(1)(2)(3)());
+console.log(add(10)(20)());
+console.log(add(1)());
+
+
+
+ 
