@@ -109,6 +109,26 @@ function logger(from) {
  logger.apply(obj, ['Bob']);
 
 
+//  Реализовать полифил
+//  (собственную функцию реализующую встроенную в js) метода bind().
+
+Function.prototype.myBind = function(context) {
+    const func = this;
+    return function(...args) {
+      return func.apply(context, args);
+    };
+  };
+  
+  // пример:
+  const obj2 = { name: "John" };
+  function greet(greeting) {
+    console.log(`${greeting}, ${this.name}!`);
+  }
+
+  greet("Hello")
+  
+  const boundGreet = greet.myBind(obj2);
+  boundGreet("Hello"); 
 
 
 
